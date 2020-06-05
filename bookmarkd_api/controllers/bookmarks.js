@@ -20,4 +20,13 @@ router.get('/', async (req, res)=>{
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedBookmark = await Bookmark.findByIdAndDelete(req.params.id);
+        res.status(200).json(deletedBookmark)
+    } catch(error) {
+        res.status(400).json(error);
+    }
+});
+
 module.exports = router;
