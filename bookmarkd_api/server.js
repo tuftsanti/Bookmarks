@@ -17,6 +17,7 @@ mongoose.connect(MONGOURL, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => console.log('connected to mongoose...'));
 
 // Middleware
+app.use(express.json());
 app.use('/bookmarks', bookmarksController);
 
 
