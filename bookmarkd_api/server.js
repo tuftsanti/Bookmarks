@@ -30,7 +30,7 @@ mongoose.connection.once('open', () => console.log('connected to mongoose...'));
 // MIDDLEWARE
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use('/bookmarks', bookmarksController);
+// app.use('/bookmarks', bookmarksController);
 
 // CONTROLLERS/ROUTES
 const bookmarksController = require('./controllers/bookmarks.js');
