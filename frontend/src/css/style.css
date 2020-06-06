@@ -1,7 +1,19 @@
 h1 {
-    color: orange;
+    color: violet ;
+}
+body {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(https://images.assetsdelivery.com/compings_v2/smallsmiles/smallsmiles1803/smallsmiles180300027.jpg);
+    color: ghostwhite;
 }
 .formCSS {
     display: flex;
     height: 3rem;
+}
+li {
+    list-style-type: none;
 }
