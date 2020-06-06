@@ -1,6 +1,10 @@
 h1 {
     color: violet ;
 }
+
+:root {
+    --light: #af96b3;
+}
 body {
     width: 100%;
     text-align: center;
