@@ -29281,7 +29281,7 @@ var _default = function _default(props) {
       props.handleSubmit(formData);
       setFormData(props.initial);
     }
-  }, "Submit new bookmark"));
+  }, "Submit"));
 };
 
 exports.default = _default;
@@ -29539,7 +29539,7 @@ var App = function App(props) {
               _context5.next = 2;
               return fetch("http://localhost:3000/bookmarks/".concat(data._id), {
                 method: 'PUT',
-                header: {
+                headers: {
                   'Content-Type': "application/json",
                   Authorization: "bearer ".concat(token)
                 },
@@ -29617,11 +29617,11 @@ var App = function App(props) {
     initial: blankForm,
     handleSubmit: createBookmark
   }), /*#__PURE__*/_react.default.createElement("ul", null, bookmarks ? bookmarks.map(function (bookmark) {
-    bookmark.url = "http://" + bookmark.url;
+    // bookmark.url = `http://`+bookmark.url
     return /*#__PURE__*/_react.default.createElement("li", {
       key: bookmark._id
     }, /*#__PURE__*/_react.default.createElement("h3", null, bookmark.title), /*#__PURE__*/_react.default.createElement("h3", null, /*#__PURE__*/_react.default.createElement("a", {
-      href: bookmark.url,
+      href: "http://" + bookmark.url,
       target: "_blank"
     }, bookmark.url)), /*#__PURE__*/_react.default.createElement("button", {
       onClick: function onClick() {
@@ -29629,7 +29629,7 @@ var App = function App(props) {
       }
     }, "Edit this bookmark"), /*#__PURE__*/_react.default.createElement("button", {
       onClick: function onClick() {
-        deleteBookmark(bookmark);
+        deleteBookmark(bookmark._id);
       }
     }, "Delete this bookmark"));
   }) : "Still Loading the Bookmarks"), /*#__PURE__*/_react.default.createElement("h3", null, "Edit your bookmark"), /*#__PURE__*/_react.default.createElement(_form.default, {
@@ -29671,7 +29671,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33237" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43055" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

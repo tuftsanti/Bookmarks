@@ -79,7 +79,7 @@ const selectBookmark = async (bookmark) => {
 const editBookmark = async (data) => {
     const response = await fetch(`http://localhost:3000/bookmarks/${data._id}`, {
         method: 'PUT',
-        header: {
+        headers: {
             'Content-Type': "application/json",
             Authorization: `bearer ${token}`
         },
@@ -116,16 +116,16 @@ return token ? (
         <Form initial={blankForm} handleSubmit={createBookmark}/>
         <ul>
             {bookmarks ? bookmarks.map((bookmark) => {
-                bookmark.url = `http://`+bookmark.url
+                // bookmark.url = `http://`+bookmark.url
                 return (
                     <li key={bookmark._id}>
                         <h3>{bookmark.title}</h3>
-                        <h3><a href={bookmark.url} target="_blank">{bookmark.url}</a></h3>
+                        <h3><a href={`http://`+bookmark.url} target="_blank">{bookmark.url}</a></h3>
                         <button onClick={() => {
                             selectBookmark(bookmark)
                         }}>Edit this bookmark</button>
                         <button onClick={() => {
-                            deleteBookmark(bookmark)
+                            deleteBookmark(bookmark._id)
                         }}>Delete this bookmark</button>
                     </li>
                 )

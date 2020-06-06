@@ -26,7 +26,7 @@ export default (props) => {
                 <button onClick={() => {
                     props.handleSubmit(formData)
                     setFormData(props.initial)
-                }}>Submit new bookmark</button>
+                }}>Submit</button>
         </>    
     )
 }
