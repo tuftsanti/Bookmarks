@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/css/style.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA","file":"app.a6a4d504.css","sourceRoot":"..","sourcesContent":["h1 {\n    color: orange;\n}\n.formCSS {\n    display: flex;\n    height: 3rem;\n}"]}
