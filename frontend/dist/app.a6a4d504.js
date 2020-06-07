@@ -29613,14 +29613,24 @@ var App = function App(props) {
 
   return token ? /*#__PURE__*/_react.default.createElement("div", {
     className: "app"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "Ian's and Andy's Helpful Web Bookmarks"), /*#__PURE__*/_react.default.createElement("h2", null, "For those too lazy to save bookmarks to your browser"), /*#__PURE__*/_react.default.createElement("h3", null, "Add a bookmark to our list"), /*#__PURE__*/_react.default.createElement(_form.default, {
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: handleLogout
+  }, "Logout"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "header"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Ian's and Andy's Helpful Web Bookmarks"), /*#__PURE__*/_react.default.createElement("h2", null, "For those too lazy to save bookmarks to your browser")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "add-edit-box"
+  }, /*#__PURE__*/_react.default.createElement("h3", {
+    className: "add-edit"
+  }, "Add a bookmark to our list"), /*#__PURE__*/_react.default.createElement(_form.default, {
     initial: blankForm,
     handleSubmit: createBookmark
-  }), /*#__PURE__*/_react.default.createElement("ul", null, bookmarks ? bookmarks.map(function (bookmark) {
+  })), /*#__PURE__*/_react.default.createElement("ul", null, bookmarks ? bookmarks.map(function (bookmark) {
     // bookmark.url = `http://`+bookmark.url
     return /*#__PURE__*/_react.default.createElement("li", {
-      key: bookmark._id
+      key: bookmark._id,
+      className: "item"
     }, /*#__PURE__*/_react.default.createElement("h3", null, bookmark.title), /*#__PURE__*/_react.default.createElement("h3", null, /*#__PURE__*/_react.default.createElement("a", {
+      className: "link",
       href: "http://" + bookmark.url,
       target: "_blank"
     }, bookmark.url)), /*#__PURE__*/_react.default.createElement("button", {
@@ -29632,10 +29642,14 @@ var App = function App(props) {
         deleteBookmark(bookmark._id);
       }
     }, "Delete this bookmark"));
-  }) : "Still Loading the Bookmarks"), /*#__PURE__*/_react.default.createElement("h3", null, "Edit your bookmark"), /*#__PURE__*/_react.default.createElement(_form.default, {
+  }) : "Still Loading the Bookmarks"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "add-edit-box"
+  }, /*#__PURE__*/_react.default.createElement("h3", {
+    className: "add-edit"
+  }, "Edit your bookmark"), /*#__PURE__*/_react.default.createElement(_form.default, {
     initial: editThisBookmark,
     handleSubmit: editBookmark
-  })) : /*#__PURE__*/_react.default.createElement(_login.default, {
+  }))) : /*#__PURE__*/_react.default.createElement(_login.default, {
     handleSubmit: handleLogin
   });
 };
@@ -29671,7 +29685,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "37049" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46161" + '/');
+>>>>>>> 08cf695afb698f6b81efe6c4a592827d2f95adf7
 
   ws.onmessage = function (event) {
     checkedAssets = {};

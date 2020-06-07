@@ -110,17 +110,22 @@ const handleLogout = () => {
 // Show the bookmarks (finally)
 return token ? (
     <div className="app">
-        <h1>Ian's and Andy's Helpful Web Bookmarks</h1>
-        <h2>For those too lazy to save bookmarks to your browser</h2>
-        <h3>Add a bookmark to our list</h3>
-        <Form initial={blankForm} handleSubmit={createBookmark}/>
+        <button onClick={handleLogout}>Logout</button>
+        <div className="header">
+            <h1>Ian's and Andy's Helpful Web Bookmarks</h1>
+            <h2>For those too lazy to save bookmarks to your browser</h2>
+        </div>
+        <div className="add-edit-box">
+            <h3 className="add-edit">Add a bookmark to our list</h3>
+            <Form initial={blankForm} handleSubmit={createBookmark}/>
+        </div>
         <ul>
             {bookmarks ? bookmarks.map((bookmark) => {
                 // bookmark.url = `http://`+bookmark.url
                 return (
-                    <li key={bookmark._id}>
+                    <li key={bookmark._id} className="item">
                         <h3>{bookmark.title}</h3>
-                        <h3><a href={`http://`+bookmark.url} target="_blank">{bookmark.url}</a></h3>
+                        <h3><a  className="link" href={`http://`+bookmark.url} target="_blank">{bookmark.url}</a></h3>
                         <button onClick={() => {
                             selectBookmark(bookmark)
                         }}>Edit this bookmark</button>
@@ -132,8 +137,10 @@ return token ? (
             }) : `Still Loading the Bookmarks`
             }
         </ul>
-        <h3>Edit your bookmark</h3>
-        <Form initial={editThisBookmark} handleSubmit={editBookmark}/>
+        <div className="add-edit-box">
+            <h3 className="add-edit">Edit your bookmark</h3>
+            <Form initial={editThisBookmark} handleSubmit={editBookmark}/>
+        </div>
 
 
     </div>
