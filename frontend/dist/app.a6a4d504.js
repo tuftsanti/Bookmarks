@@ -29285,57 +29285,6 @@ var _default = function _default(props) {
 };
 
 exports.default = _default;
-},{"@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js"}],"src/login.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
-var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-var _default = function _default(props) {
-  var _React$useState = _react.default.useState({
-    username: '',
-    password: ''
-  }),
-      _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
-      formData = _React$useState2[0],
-      setFormData = _React$useState2[1];
-
-  var submitLogin = function submitLogin(event) {
-    setFormData(_objectSpread(_objectSpread({}, formData), {}, (0, _defineProperty2.default)({}, event.target.name, event.target.value)));
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, "Enter Username: "), /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    name: "username",
-    value: formData.username,
-    onChange: submitLogin
-  }), /*#__PURE__*/_react.default.createElement("h3", null, "Enter Password: "), /*#__PURE__*/_react.default.createElement("input", {
-    type: "password",
-    name: "password",
-    value: formData.password,
-    onChange: submitLogin
-  }), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: function onClick() {
-      props.handleSubmit(formData);
-    }
-  }, "Submit Login Info"));
-};
-
-exports.default = _default;
 },{"@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -29353,10 +29302,9 @@ require("./css/style.css");
 
 var _form = _interopRequireDefault(require("./form.js"));
 
-var _login = _interopRequireDefault(require("./login.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import Login from './login.js'
 var App = function App(props) {
   // Hook to hold array of bookmarks
   var _React$useState = _react.default.useState(null),
@@ -29372,12 +29320,9 @@ var App = function App(props) {
       _React$useState4 = (0, _slicedToArray2.default)(_React$useState3, 2),
       editThisBookmark = _React$useState4[0],
       setEditedBookmark = _React$useState4[1]; // Store jwt
-
-
-  var _React$useState5 = _react.default.useState(null),
-      _React$useState6 = (0, _slicedToArray2.default)(_React$useState5, 2),
-      token = _React$useState6[0],
-      setToken = _React$useState6[1]; // Blank the form
+  // REMOVING NOT ADDING AUTH TO BACKEND
+  // const [token, setToken] = React.useState(null)
+  // Blank the form
 
 
   var blankForm = {
@@ -29393,11 +29338,7 @@ var App = function App(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch('http://localhost:3000/bookmarks', {
-                headers: {
-                  Authorization: "bearer ".concat(token)
-                }
-              });
+              return fetch('http://localhost:3000/bookmarks');
 
             case 2:
               response = _context.sent;
@@ -29421,22 +29362,22 @@ var App = function App(props) {
       return _ref.apply(this, arguments);
     };
   }(); // Hook to GET API data
+  // REMOVING NOT ADDING AUTH TO BACKEND
 
 
   _react.default.useEffect(function () {
-    if (token) {
-      getBookmarks();
-    }
-  }, [token]); // Localize storage
+    // if (token) {
+    getBookmarks(); // }
+  }, []); // Localize storage
+  // REMOVING NOT ADDING AUTH TO BACKEND
 
-
-  _react.default.useEffect(function () {
-    var checkToken = JSON.parse(window.localStorage.getItem('token'));
-
-    if (checkToken) {
-      setToken(checkToken);
-    }
-  }, []); // Creates Bookmark from form
+  /* React.useEffect(() => {
+      const checkToken = JSON.parse(window.localStorage.getItem('token'))
+      if (checkToken) {
+          setToken(checkToken)
+      }
+  }, [])*/
+  // Creates Bookmark from form
 
 
   var createBookmark = /*#__PURE__*/function () {
@@ -29450,8 +29391,9 @@ var App = function App(props) {
               return fetch('http://localhost:3000/bookmarks', {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: "bearer ".concat(token)
+                  'Content-Type': 'application/json'
+                  /* Authorization: `bearer ${token}`*/
+
                 },
                 body: JSON.stringify(data)
               });
@@ -29483,10 +29425,10 @@ var App = function App(props) {
             case 0:
               _context3.next = 2;
               return fetch("http://localhost:3000/bookmarks/".concat(id), {
-                method: 'DELETE',
-                headers: {
-                  Authorization: "bearer ".concat(token)
-                }
+                method: 'DELETE'
+                /*,
+                headers: {Authorization: `bearer ${token}`}*/
+
               });
 
             case 2:
@@ -29540,8 +29482,10 @@ var App = function App(props) {
               return fetch("http://localhost:3000/bookmarks/".concat(data._id), {
                 method: 'PUT',
                 headers: {
-                  'Content-Type': "application/json",
-                  Authorization: "bearer ".concat(token)
+                  'Content-Type': "application/json"
+                  /*,
+                  Authorization: `bearer ${token}` */
+
                 },
                 body: JSON.stringify(data)
               });
@@ -29562,60 +29506,32 @@ var App = function App(props) {
       return _ref5.apply(this, arguments);
     };
   }(); // Login time
+  // REMOVING NOT ADDING AUTH TO BACKEND
+
+  /* const handleLogin = async (data) => {
+      const response = await fetch(`http://localhost:3000/login`, {
+          method: 'POST',
+          headers: {'Content-type': 'application/json'},
+          body: JSON.stringify(data)
+      })
+      const result = await response.json()
+      setToken(result)
+      window.localStorage.setItem('token', JSON.stringify(result))
+  }*/
+  // Logout Time
+  // REMOVING NOT ADDING AUTH TO BACKEND
+
+  /* const handleLogout = () => {
+      window.localStorage.removeItem('token')
+      setToken(null)
+      setBookmark(null)
+  } */
+  // Show the bookmarks (finally)
 
 
-  var handleLogin = /*#__PURE__*/function () {
-    var _ref6 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6(data) {
-      var response, result;
-      return _regenerator.default.wrap(function _callee6$(_context6) {
-        while (1) {
-          switch (_context6.prev = _context6.next) {
-            case 0:
-              _context6.next = 2;
-              return fetch("http://localhost:3000/login", {
-                method: 'POST',
-                headers: {
-                  'Content-type': 'application/json'
-                },
-                body: JSON.stringify(data)
-              });
-
-            case 2:
-              response = _context6.sent;
-              _context6.next = 5;
-              return response.json();
-
-            case 5:
-              result = _context6.sent;
-              setToken(result);
-              window.localStorage.setItem('token', JSON.stringify(result));
-
-            case 8:
-            case "end":
-              return _context6.stop();
-          }
-        }
-      }, _callee6);
-    }));
-
-    return function handleLogin(_x5) {
-      return _ref6.apply(this, arguments);
-    };
-  }(); // Logout Time
-
-
-  var handleLogout = function handleLogout() {
-    window.localStorage.removeItem('token');
-    setToken(null);
-    setBookmark(null);
-  }; // Show the bookmarks (finally)
-
-
-  return token ? /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     className: "app"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: handleLogout
-  }, "Logout"), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "header"
   }, /*#__PURE__*/_react.default.createElement("h1", null, "Ian's and Andy's Helpful Web Bookmarks"), /*#__PURE__*/_react.default.createElement("h2", null, "For those too lazy to save bookmarks to your browser")), /*#__PURE__*/_react.default.createElement("div", {
     className: "add-edit-box"
@@ -29649,15 +29565,13 @@ var App = function App(props) {
   }, "Edit your bookmark"), /*#__PURE__*/_react.default.createElement(_form.default, {
     initial: editThisBookmark,
     handleSubmit: editBookmark
-  }))) : /*#__PURE__*/_react.default.createElement(_login.default, {
-    handleSubmit: handleLogin
-  });
+  }))); // : <Login handleSubmit={handleLogin}/>
 };
 
 var target = document.getElementById('app');
 
 _reactDom.default.render( /*#__PURE__*/_react.default.createElement(App, null), target);
-},{"@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./css/style.css":"src/css/style.css","./form.js":"src/form.js","./login.js":"src/login.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./css/style.css":"src/css/style.css","./form.js":"src/form.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29685,7 +29599,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46161" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35001" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

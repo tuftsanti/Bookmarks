@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './css/style.css'
 import Form from './form.js'
-import Login from './login.js'
+// import Login from './login.js'
 
 const App = (props) => {
     // Hook to hold array of bookmarks
@@ -15,7 +15,8 @@ const App = (props) => {
 )
 
 // Store jwt
-const [token, setToken] = React.useState(null)
+// REMOVING NOT ADDING AUTH TO BACKEND
+// const [token, setToken] = React.useState(null)
 
 // Blank the form
 const blankForm = {
@@ -25,36 +26,39 @@ const blankForm = {
 
 // GET the bookmarks
 const getBookmarks = async () => {
-    const response = await fetch('http://localhost:3000/bookmarks', {
+    const response = await fetch('http://localhost:3000/bookmarks') /*, {
         headers: { Authorization: `bearer ${token}` }
-    })
+    })*/
     const result = await response.json()
     console.log(result)
     setBookmark(result)
 }
 
 // Hook to GET API data
+// REMOVING NOT ADDING AUTH TO BACKEND
 React.useEffect(() => {
-    if (token) {
+    // if (token) {
         getBookmarks()
-    }
-}, [token])
+    // }
+}, [])
+
 
 // Localize storage
-React.useEffect(() => {
+// REMOVING NOT ADDING AUTH TO BACKEND
+/* React.useEffect(() => {
     const checkToken = JSON.parse(window.localStorage.getItem('token'))
     if (checkToken) {
         setToken(checkToken)
     }
-}, [])
+}, [])*/
 
 // Creates Bookmark from form
 const createBookmark = async (data) => {
     const response = await fetch('http://localhost:3000/bookmarks', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            Authorization: `bearer ${token}`
+            'Content-Type': 'application/json'
+            /* Authorization: `bearer ${token}`*/
         },
         body: JSON.stringify(data)
     })
@@ -64,8 +68,8 @@ const createBookmark = async (data) => {
 // Deletes a bookmark
 const deleteBookmark = async (id) => {
     const response = await fetch(`http://localhost:3000/bookmarks/${id}`, {
-        method: 'DELETE',
-        headers: {Authorization: `bearer ${token}`}
+        method: 'DELETE' /*,
+        headers: {Authorization: `bearer ${token}`}*/
     })
     getBookmarks()
 }
@@ -80,8 +84,8 @@ const editBookmark = async (data) => {
     const response = await fetch(`http://localhost:3000/bookmarks/${data._id}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': "application/json",
-            Authorization: `bearer ${token}`
+            'Content-Type': "application/json" /*,
+            Authorization: `bearer ${token}` */
         },
         body: JSON.stringify(data)
     })
@@ -89,7 +93,8 @@ const editBookmark = async (data) => {
 }
 
 // Login time
-const handleLogin = async (data) => {
+// REMOVING NOT ADDING AUTH TO BACKEND
+/* const handleLogin = async (data) => {
     const response = await fetch(`http://localhost:3000/login`, {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
@@ -98,19 +103,20 @@ const handleLogin = async (data) => {
     const result = await response.json()
     setToken(result)
     window.localStorage.setItem('token', JSON.stringify(result))
-}
+}*/
 
 // Logout Time
-const handleLogout = () => {
+// REMOVING NOT ADDING AUTH TO BACKEND
+/* const handleLogout = () => {
     window.localStorage.removeItem('token')
     setToken(null)
     setBookmark(null)
-}
+} */
 
 // Show the bookmarks (finally)
-return token ? (
+return (
     <div className="app">
-        <button onClick={handleLogout}>Logout</button>
+        {/* <button onClick={handleLogout}>Logout</button> */}
         <div className="header">
             <h1>Ian's and Andy's Helpful Web Bookmarks</h1>
             <h2>For those too lazy to save bookmarks to your browser</h2>
@@ -144,7 +150,7 @@ return token ? (
 
 
     </div>
-) : <Login handleSubmit={handleLogin}/>
+) // : <Login handleSubmit={handleLogin}/>
 
 
 };
