@@ -19,7 +19,7 @@ const [token, setToken] = React.useState(null)
 
 // Blank the form
 const blankForm = {
-    name: '',
+    title: '',
     url: ''
 }
 
