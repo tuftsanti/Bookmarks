@@ -1,6 +1,4 @@
 # Bookmarks
-# Ian Galleher and Andy Riecker collab.
+## Collaboration by Ian Galleher and Andy Riecker
 
-Our Bookmark App for GA
-
-Added a DEV and newFrontend branches when CRA Minimal failed!
+Our simple Bookmark App for General Assembly
